@@ -1,2 +1,9 @@
-<p>admin-layout works!</p>
+<nav class="navbar bg-primary">
+  <h1><a routerLink="/admin">admin panel</a></h1>
+  <ul>
+    <li routerLinkActive="active"><a [routerLink]="['dashboard']">dashboard</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['create']">create</a></li>
+    <li><a href="#" (click)="onLogout($event)">exit</a></li>
+  </ul>
+</nav>
 <router-outlet></router-outlet>

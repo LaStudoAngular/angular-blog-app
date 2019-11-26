@@ -6,6 +6,7 @@ import { LoginPageComponent } from './views/login-page/login-page.component';
 import { DashboardPageComponent } from './views/dashboard-page/dashboard-page.component';
 import { CreatePageComponent } from './views/create-page/create-page.component';
 import { EditPageComponent } from './views/edit-page/edit-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { EditPageComponent } from './views/edit-page/edit-page.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',

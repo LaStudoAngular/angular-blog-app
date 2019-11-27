@@ -4,14 +4,16 @@
     <label for="email">Email:</label>
     <input id="email" name="email" type="email" formControlName="email" />
     <div *ngIf="email().touched && email().invalid" class="validation">
-      <small>validation</small>
+      <small *ngIf="email().errors.required">email is required</small>
+      <small *ngIf="email().errors.email">email is invalid</small>
     </div>
   </div>
   <div class="form-control" [ngClass]="{'invalid': password().touched && password().invalid}">
     <label for="password">Password:</label>
     <input id="password" name="password" type="password" formControlName="password" />
     <div *ngIf="password().touched && password().invalid" class="validation">
-      <small>validation</small>
+      <small *ngIf="password().errors.required">password is required</small>
+      <small *ngIf="password().errors.minlength">actual password length is {{ password().errors.minlength.actualLength }} but required minimum length is {{ password().errors.minlength.requiredLength }}</small>
     </div>
   </div>
   <button [disabled]="form.invalid" class="btn btn-primary" type="submit">submit</button>

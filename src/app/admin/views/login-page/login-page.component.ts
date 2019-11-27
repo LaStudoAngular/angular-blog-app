@@ -27,8 +27,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.valid) {
-      console.log(this.form);
-    }
+    console.log(this.form);
   }
 }

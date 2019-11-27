@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'bl-login-page',
@@ -13,9 +13,17 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: [''],
-      password: [''],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(3)]],
     });
+  }
+
+  public email() {
+    return this.form.get('email');
+  }
+
+  public password() {
+    return this.form.get('password');
   }
 
   onSubmit(): void {

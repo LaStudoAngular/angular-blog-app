@@ -7,6 +7,8 @@ import { DashboardPageComponent } from './views/dashboard-page/dashboard-page.co
 import { CreatePageComponent } from './views/create-page/create-page.component';
 import { EditPageComponent } from './views/edit-page/edit-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../shared/services/auth.service';
+import { SharedModule } from '../shared/modules/shared.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ReactiveFormsModule } from '@angular/forms';
         ],
       },
     ]),
+    SharedModule,
   ],
   exports: [RouterModule],
+  providers: [AuthService],
 })
 export class AdminModule {}

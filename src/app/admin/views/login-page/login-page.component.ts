@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/user';
+import { AuthService } from '../../../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bl-login-page',
@@ -10,7 +12,7 @@ import { User } from '../../../shared/interfaces/user';
 export class LoginPageComponent implements OnInit {
   private form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -34,7 +36,10 @@ export class LoginPageComponent implements OnInit {
         email,
         password,
       };
-      console.log(user);
+      this.authService.login(user).subscribe(() => {
+        this.form.reset();
+        this.router.navigate(['/admin', 'dashboard']);
+      });
     }
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../shared/interfaces/user';
 
 @Component({
   selector: 'bl-login-page',
@@ -27,6 +28,13 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.form);
+    const { email, password } = this.form.value;
+    if (this.form.valid) {
+      const user: User = {
+        email,
+        password,
+      };
+      console.log(user);
+    }
   }
 }

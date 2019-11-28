@@ -34,7 +34,7 @@ export class AuthService {
     }
   }
 
-  login(user: User): Observable<any> {
+  login(user: User): Observable<User> {
     user.returnSecureToken = true;
     return this.http
       .post(URL, user)

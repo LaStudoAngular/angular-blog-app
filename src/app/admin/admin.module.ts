@@ -10,7 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { SharedModule } from '../shared/modules/shared.module';
 import { AuthGuard } from '../shared/services/auth.guard';
-import { PostService } from '../shared/services/post.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +38,6 @@ import { PostService } from '../shared/services/post.service';
     SharedModule,
   ],
   exports: [RouterModule],
-  providers: [AuthService, AuthGuard, PostService],
+  providers: [AuthService, AuthGuard],
 })
 export class AdminModule {}

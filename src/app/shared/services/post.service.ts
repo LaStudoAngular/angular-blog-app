@@ -4,12 +4,21 @@ import { Post } from '../interfaces/post';
 import { Observable } from 'rxjs';
 const URL = ``;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class PostService {
   constructor(private http: HttpClient) {}
 
-  createPost(post: Post) {
-    console.log(post);
-    // return this.http.post(URL, post);
+  createPost(post: Post): Observable<Post> {
+    return this.http.post<Post>(URL, post);
+  }
+
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(URL);
+  }
+
+  editPost(post: Post): Observable<Post> {
+    return this.http.post<Post>(URL, post);
   }
 }

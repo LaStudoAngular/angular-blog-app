@@ -8,7 +8,7 @@ import { AuthService } from '../../../../shared/services/auth.service';
   styleUrls: ['./admin-layout.component.scss'],
 })
 export class AdminLayoutComponent {
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, public authService: AuthService) {}
 
   onLogout(event: MouseEvent): void {
     event.preventDefault();

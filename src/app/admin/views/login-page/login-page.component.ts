@@ -13,7 +13,7 @@ export class LoginPageComponent implements OnInit {
   private form: FormGroup;
   public submitted = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -39,11 +39,14 @@ export class LoginPageComponent implements OnInit {
         email,
         password,
       };
-      this.authService.login(user).subscribe(() => {
-        this.form.reset();
-        this.router.navigate(['/admin', 'dashboard']);
-        this.submitted = false;
-      });
+      this.authService.login(user).subscribe(
+        () => {
+          this.form.reset();
+          this.router.navigate(['/admin', 'dashboard']);
+          this.submitted = false;
+        },
+        error => (this.submitted = false),
+      );
     }
   }
 }

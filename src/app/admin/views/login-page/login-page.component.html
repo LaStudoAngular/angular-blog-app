@@ -1,7 +1,8 @@
+<div *ngIf="authService.$error | async as errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 <form class="card form" (ngSubmit)="onSubmit()" [formGroup]="form">
   <h2>enter admin panel</h2>
   <div class="form-control" [ngClass]="{'invalid': email().touched && email().invalid}">
-    <label for="email">Email:</label>
+    <label class="label" for="email">email:</label>
     <input id="email" name="email" type="email" formControlName="email" />
     <div *ngIf="email().touched && email().invalid" class="validation">
       <small *ngIf="email().errors.required">email is required</small>
@@ -9,12 +10,12 @@
     </div>
   </div>
   <div class="form-control" [ngClass]="{'invalid': password().touched && password().invalid}">
-    <label for="password">Password:</label>
+    <label class="label" for="password">password:</label>
     <input id="password" name="password" type="password" formControlName="password" />
     <div *ngIf="password().touched && password().invalid" class="validation">
       <small *ngIf="password().errors.required">password is required</small>
       <small *ngIf="password().errors.minlength">actual password length is {{ password().errors.minlength.actualLength }} but required minimum length is {{ password().errors.minlength.requiredLength }}</small>
     </div>
   </div>
-  <button [disabled]="form.invalid || submitted" class="btn btn-primary" type="submit">submit</button>
+  <button [disabled]="form.invalid || submitted" class="btn btn-primary" type="submit">login</button>
 </form>

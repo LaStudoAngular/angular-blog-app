@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { User } from '../interfaces/user';
-import { Observable } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { FirebaseAuthResponse } from '../interfaces/firebase-auth-response';
 
 const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`;
 
 @Injectable()
 export class AuthService {
+  public $error: Subject<string> = new Subject<string>();
+
   constructor(private http: HttpClient) {}
 
   get getToken(): string {
@@ -34,7 +36,9 @@ export class AuthService {
 
   login(user: User): Observable<any> {
     user.returnSecureToken = true;
-    return this.http.post(URL, user).pipe(tap(this.setToken));
+    return this.http
+      .post(URL, user)
+      .pipe(tap(this.setToken), catchError(this.handleError.bind(this)));
   }
 
   logout(): void {
@@ -43,5 +47,21 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return Boolean(this.getToken);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const { message } = error.error.error;
+    switch (message) {
+      case 'EMAIL_NOT_FOUND':
+        this.$error.next('EMAIL NOT FOUND');
+        break;
+      case 'INVALID_PASSWORD':
+        this.$error.next('INVALID PASSWORD');
+        break;
+      case 'INVALID_EMAIL':
+        this.$error.next('INVALID EMAIL');
+        break;
+    }
+    return throwError(error);
   }
 }

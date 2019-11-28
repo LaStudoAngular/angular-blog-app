@@ -35,12 +35,12 @@ export class CreatePageComponent implements OnInit {
 
   onSubmit(): void {
     const { title, body, author } = this.createForm.value;
-    const post: Post = {
+    const newPost: Post = {
       title,
       body,
       author,
       date: new Date(),
     };
-    this.postService.createPost(post);
+    this.postService.createPost(newPost).subscribe((post: Post) => console.log(post));
   }
 }

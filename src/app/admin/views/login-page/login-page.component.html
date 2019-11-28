@@ -1,4 +1,5 @@
 <div *ngIf="authService.$error | async as errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+<div *ngIf="message" class="alert alert-info">{{ message }}</div>
 <form class="card form" (ngSubmit)="onSubmit()" [formGroup]="form">
   <h2>enter admin panel</h2>
   <div class="form-control" [ngClass]="{'invalid': email().touched && email().invalid}">

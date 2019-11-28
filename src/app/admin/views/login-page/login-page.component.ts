@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../shared/interfaces/user';
 import { AuthService } from '../../../shared/services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'bl-login-page',
@@ -12,10 +12,21 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
   private form: FormGroup;
   public submitted = false;
+  public message = '';
 
-  constructor(private fb: FormBuilder, public authService: AuthService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    public authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params.loginAgain) {
+        this.message = 'Login again, please';
+      }
+    });
     this.form = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(3)]],

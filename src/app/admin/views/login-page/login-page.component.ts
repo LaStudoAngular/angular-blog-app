@@ -33,11 +33,11 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  public email() {
+  get email() {
     return this.form.get('email');
   }
 
-  public password() {
+  get password() {
     return this.form.get('password');
   }
 

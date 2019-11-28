@@ -2,20 +2,20 @@
 <div *ngIf="message" class="alert alert-info">{{ message }}</div>
 <form class="card form" (ngSubmit)="onSubmit()" [formGroup]="form">
   <h2>enter admin panel</h2>
-  <div class="form-control" [ngClass]="{'invalid': email().touched && email().invalid}">
+  <div class="form-control" [ngClass]="{'invalid': email.touched && email.invalid}">
     <label class="label" for="email">email:</label>
     <input id="email" name="email" type="email" formControlName="email" />
-    <div *ngIf="email().touched && email().invalid" class="validation">
-      <small *ngIf="email().errors.required">email is required</small>
-      <small *ngIf="email().errors.email">email is invalid</small>
+    <div *ngIf="email.touched && email.invalid" class="validation">
+      <small *ngIf="email.errors.required">email is required</small>
+      <small *ngIf="email.errors.email">email is invalid</small>
     </div>
   </div>
-  <div class="form-control" [ngClass]="{'invalid': password().touched && password().invalid}">
+  <div class="form-control" [ngClass]="{'invalid': password.touched && password.invalid}">
     <label class="label" for="password">password:</label>
     <input id="password" name="password" type="password" formControlName="password" />
-    <div *ngIf="password().touched && password().invalid" class="validation">
-      <small *ngIf="password().errors.required">password is required</small>
-      <small *ngIf="password().errors.minlength">actual password length is {{ password().errors.minlength.actualLength }} but required minimum length is {{ password().errors.minlength.requiredLength }}</small>
+    <div *ngIf="password.touched && password.invalid" class="validation">
+      <small *ngIf="password.errors.required">password is required</small>
+      <small *ngIf="password.errors.minlength">actual password length is {{ password.errors.minlength.actualLength }} but required minimum length is {{ password.errors.minlength.requiredLength }}</small>
     </div>
   </div>
   <button [disabled]="form.invalid || submitted" class="btn btn-primary" type="submit">login</button>

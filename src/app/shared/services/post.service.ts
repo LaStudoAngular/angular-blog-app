@@ -8,7 +8,8 @@ const URL = ``;
 export class PostService {
   constructor(private http: HttpClient) {}
 
-  createPost(post: Post): Observable<any> {
-    return this.http.post(URL, post);
+  createPost(post: Post) {
+    console.log(post);
+    // return this.http.post(URL, post);
   }
 }

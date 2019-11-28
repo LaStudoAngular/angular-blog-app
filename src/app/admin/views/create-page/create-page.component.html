@@ -1,5 +1,6 @@
 <form class="form" [formGroup]="createForm" (ngSubmit)="onSubmit()">
   <h1>create new post</h1>
+
   <div class="form-control" [ngClass]="{'invalid': title.touched && title.invalid}">
     <label class="label" for="title">title:</label>
     <input type="text" id="title" name="title" placeholder="post title" formControlName="title">
@@ -7,13 +8,15 @@
       <small *ngIf="title.errors.required">title is required</small>
     </div>
   </div>
+
   <div class="form-control" [ngClass]="{'invalid': body.touched && body.invalid}">
-    <label class="label" for="body">body:</label>
-    <input type="text" id="body" name="body" placeholder="post body" formControlName="body">
+    <label class="label">body:</label>
+    <quill-editor formControlName="body"></quill-editor>
     <div *ngIf="body.touched && body.invalid" class="validation">
       <small *ngIf="body.errors.required">body is required</small>
     </div>
   </div>
+
   <div class="form-control" [ngClass]="{'invalid': author.touched && author.invalid}">
     <label class="label" for="author">author:</label>
     <input type="text" id="author" name="author" placeholder="author" formControlName="author">

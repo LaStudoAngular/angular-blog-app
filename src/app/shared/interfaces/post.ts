@@ -3,4 +3,5 @@ export interface Post {
   body: string;
   author: string;
   date: Date;
+  id?: string;
 }

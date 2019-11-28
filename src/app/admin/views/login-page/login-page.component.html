@@ -16,5 +16,5 @@
       <small *ngIf="password().errors.minlength">actual password length is {{ password().errors.minlength.actualLength }} but required minimum length is {{ password().errors.minlength.requiredLength }}</small>
     </div>
   </div>
-  <button [disabled]="form.invalid" class="btn btn-primary" type="submit">submit</button>
+  <button [disabled]="form.invalid || submitted" class="btn btn-primary" type="submit">submit</button>
 </form>

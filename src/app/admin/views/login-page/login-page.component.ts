@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
   private form: FormGroup;
+  public submitted = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
@@ -31,6 +32,8 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(): void {
     const { email, password } = this.form.value;
+    this.submitted = true;
+
     if (this.form.valid) {
       const user: User = {
         email,
@@ -39,6 +42,7 @@ export class LoginPageComponent implements OnInit {
       this.authService.login(user).subscribe(() => {
         this.form.reset();
         this.router.navigate(['/admin', 'dashboard']);
+        this.submitted = false;
       });
     }
   }

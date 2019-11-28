@@ -1,8 +1,10 @@
 export interface FirebaseAuthResponse {
   idToken: string;
-  displayName?: string;
+  expiresIn: string;
   email?: string;
+  displayName?: string;
   kind?: string;
   localId?: string;
   registered?: boolean;
+  refreshToken?: string;
 }

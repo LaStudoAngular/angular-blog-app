@@ -13,18 +13,33 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   get getToken(): string {
-    return '';
+    const date = new Date();
+    const expTokenDate = new Date(window.localStorage.getItem('exp-token'));
+    if (date > expTokenDate) {
+      this.logout();
+      return null;
+    }
+    return window.localStorage.getItem('token');
   }
 
-  private setToken(response: FirebaseAuthResponse) {
-    console.log(response.idToken);
+  private setToken(response: FirebaseAuthResponse | null) {
+    if (response) {
+      const expDate = new Date(new Date().getTime() + Number(response.expiresIn) * 1000);
+      window.localStorage.setItem('token', String(response.idToken));
+      window.localStorage.setItem('exp-token', String(expDate));
+    } else {
+      window.localStorage.clear();
+    }
   }
 
   login(user: User): Observable<any> {
+    user.returnSecureToken = true;
     return this.http.post(URL, user).pipe(tap(this.setToken));
   }
 
-  logout() {}
+  logout(): void {
+    this.setToken(null);
+  }
 
   isAuthenticated(): boolean {
     return Boolean(this.getToken);

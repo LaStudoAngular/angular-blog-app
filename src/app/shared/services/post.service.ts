@@ -49,15 +49,22 @@ export class PostService {
   }
 
   updatePost(post: Post): Observable<Post> {
-    return this.http.patch<Post>(`${environment.dbURL}/posts.json`, post).pipe(
-      map((response: Post) => {
-        return {
-          ...response,
-          id: post.id,
-          date: new Date(post.date),
-        };
-      }),
-    );
+    return this.http
+      .patch<Post>(`${environment.dbURL}/posts.json`, {
+        // TODO: bug here - fix in future
+        title: post.title,
+        body: post.body,
+        date: post.date,
+      })
+      .pipe(
+        map((response: Post) => {
+          return {
+            ...response,
+            id: post.id,
+            date: new Date(post.date),
+          };
+        }),
+      );
   }
 
   deletePost(post: Post): Observable<void> {

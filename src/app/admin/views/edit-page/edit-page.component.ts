@@ -27,9 +27,9 @@ export class EditPageComponent implements OnInit, OnDestroy {
     if (this.editForm.valid) {
       const { title, body } = this.editForm.value;
       const editPost: Post = {
-        ...this.post,
         title,
         body,
+        author: this.post.author,
         date: new Date(),
       };
       this.updateSub = this.postService.updatePost(editPost).subscribe(() => {

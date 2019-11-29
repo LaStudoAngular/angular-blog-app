@@ -11,27 +11,33 @@ import { Router } from '@angular/router';
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
-  private unsubscribe = new Subscription();
+  private getSub = new Subscription();
+  private removeSub = new Subscription();
   public searchString = '';
 
   constructor(private postService: PostService, private router: Router) {}
 
   ngOnInit(): void {
-    this.unsubscribe = this.postService
-      .getAllPosts()
-      .subscribe((posts: Post[]) => (this.posts = posts));
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe.unsubscribe();
+    this.getSub = this.postService.getAllPosts().subscribe((posts: Post[]) => (this.posts = posts));
   }
 
   onRemovePost(event: MouseEvent, post: Post) {
     event.preventDefault();
-    console.log(`remove post`, post);
+    this.removeSub = this.postService
+      .deletePost(post)
+      .subscribe(() => (this.posts = this.posts.filter((el: Post) => el.id !== post.id)));
   }
 
   onShowDetails(post: Post) {
     this.router.navigate(['admin', 'post', post.id, 'edit']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.getSub) {
+      this.getSub.unsubscribe();
+    }
+    if (this.removeSub) {
+      this.removeSub.unsubscribe();
+    }
   }
 }

@@ -40,7 +40,7 @@ export class PostService {
     return this.http.post<Post>(`${environment.dbURL}`, post);
   }
 
-  deletePost(post: Post) {
-    //
+  deletePost(post: Post): Observable<void> {
+    return this.http.delete<void>(`${environment.dbURL}/posts/${post.id}.json`);
   }
 }

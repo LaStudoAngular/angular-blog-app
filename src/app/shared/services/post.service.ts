@@ -25,10 +25,22 @@ export class PostService {
   }
 
   getAllPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${environment.dbURL}/posts.json`);
+    return this.http.get<Post[]>(`${environment.dbURL}/posts.json`).pipe(
+      map((response: { [key: string]: any }) => {
+        return Object.keys(response).map(key => ({
+          ...response[key],
+          id: key,
+          date: new Date(response[key].date),
+        }));
+      }),
+    );
   }
 
   editPost(post: Post): Observable<Post> {
     return this.http.post<Post>(`${environment.dbURL}`, post);
+  }
+
+  deletePost(post: Post) {
+    //
   }
 }

@@ -1,2 +1,32 @@
-<p>dashboard-page works!</p>
-<!--<p *ngFor="post in posts" class="post">{{ post }}</p>-->
+<div *ngIf="posts.length; else loading">
+  <div class="form-control">
+    <input type="text" placeholder="search here ..." />
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>author</th>
+        <th>title</th>
+        <th>data</th>
+        <th>actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts; let idx = index">
+        <td>{{ idx + 1 }}</td>
+        <td>{{ post.author }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.date | date: 'medium' }}</td>
+        <td>
+          <button (click)="onShowDetails(post)" type="button" class="btn btn-link">show post details</button>
+          <a style="margin-left: .4rem;" (click)="onRemovePost($event, post)" href="#">remove post</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loading>
+  <div class="loader">loading data from firebase</div>
+</ng-template>

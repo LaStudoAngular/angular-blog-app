@@ -49,7 +49,7 @@ export class PostService {
   }
 
   updatePost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${environment.dbURL}/posts.json`, post).pipe(
+    return this.http.patch<Post>(`${environment.dbURL}/posts.json`, post).pipe(
       map((response: Post) => {
         return {
           ...response,

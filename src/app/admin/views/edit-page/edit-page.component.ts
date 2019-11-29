@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PostService } from '../../../shared/services/post.service';
 import { Post } from '../../../shared/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'bl-edit-page',
   templateUrl: './edit-page.component.html',
   styleUrls: ['./edit-page.component.scss'],
 })
-export class EditPageComponent implements OnInit {
+export class EditPageComponent implements OnInit, OnDestroy {
   public post: Post;
   public editForm: FormGroup;
+  private updateSub = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
@@ -23,15 +25,14 @@ export class EditPageComponent implements OnInit {
 
   onSubmit() {
     if (this.editForm.valid) {
-      const { title, body, author } = this.editForm.value;
+      const { title, body } = this.editForm.value;
       const editPost: Post = {
+        ...this.post,
         title,
         body,
-        author,
-        id: this.post.id,
         date: new Date(),
       };
-      this.postService.updatePost(editPost).subscribe(() => {
+      this.updateSub = this.postService.updatePost(editPost).subscribe(() => {
         this.editForm.reset();
         this.router.navigate(['admin', 'dashboard']);
       });
@@ -59,5 +60,11 @@ export class EditPageComponent implements OnInit {
 
   get body() {
     return this.editForm.get('body');
+  }
+
+  ngOnDestroy(): void {
+    if (this.updateSub) {
+      this.updateSub.unsubscribe();
+    }
   }
 }

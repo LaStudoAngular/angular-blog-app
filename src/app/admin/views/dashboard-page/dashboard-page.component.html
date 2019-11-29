@@ -19,8 +19,8 @@
         <td>{{ post.title }}</td>
         <td>{{ post.date | date: 'medium' }}</td>
         <td>
-          <button (click)="onShowDetails(post)" type="button" class="btn btn-link">show post details</button>
-          <a style="margin-left: .4rem;" (click)="onRemovePost($event, post)" href="#">remove post</a>
+          <button (click)="onShowDetails(post)" type="button" class="btn btn-link uppercase">post details</button>
+          <a class="uppercase" style="margin-left: .4rem;" (click)="onRemovePost($event, post)" href="#">remove post</a>
         </td>
       </tr>
     </tbody>

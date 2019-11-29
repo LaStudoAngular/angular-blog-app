@@ -36,8 +36,28 @@ export class PostService {
     );
   }
 
-  editPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${environment.dbURL}`, post);
+  getSinglePost(id: string): Observable<Post> {
+    return this.http.get<Post>(`${environment.dbURL}/posts/${id}.json`).pipe(
+      map((post: Post) => {
+        return {
+          ...post,
+          id,
+          date: new Date(post.date),
+        };
+      }),
+    );
+  }
+
+  updatePost(post: Post): Observable<Post> {
+    return this.http.post<Post>(`${environment.dbURL}/posts.json`, post).pipe(
+      map((response: Post) => {
+        return {
+          ...response,
+          id: post.id,
+          date: new Date(post.date),
+        };
+      }),
+    );
   }
 
   deletePost(post: Post): Observable<void> {

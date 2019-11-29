@@ -295,3 +295,13 @@ table th {
     }
   }
 }
+
+// helpers
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}

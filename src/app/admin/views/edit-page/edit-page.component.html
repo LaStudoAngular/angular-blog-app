@@ -1,1 +1,28 @@
-<p>edit-page works!</p>
+<form class="form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <h1 class="capitalize">edit post</h1>
+
+  <div class="form-control" [ngClass]="{'invalid': title.touched && title.invalid}">
+    <label class="capitalize" for="title">title:</label>
+    <input type="text" id="title" name="title" placeholder="post title" formControlName="title">
+    <div *ngIf="title.touched && title.invalid" class="validation">
+      <small *ngIf="title.errors.required">title is required</small>
+    </div>
+  </div>
+
+  <div class="form-control" [ngClass]="{'invalid': body.touched && body.invalid}">
+    <label class="capitalize">body:</label>
+    <quill-editor formControlName="body"></quill-editor>
+    <div *ngIf="body.touched && body.invalid" class="validation">
+      <small *ngIf="body.errors.required">body is required</small>
+    </div>
+  </div>
+
+  <div class="form-control" [ngClass]="{'invalid': author.touched && author.invalid}">
+    <label class="capitalize" for="author">author:</label>
+    <input type="text" id="author" name="author" placeholder="author" formControlName="author">
+    <div *ngIf="author.touched && author.invalid" class="validation">
+      <small *ngIf="author.errors.required">author is required</small>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-block btn-dark uppercase" [disabled]="editForm.invalid">edit post</button>
+</form>

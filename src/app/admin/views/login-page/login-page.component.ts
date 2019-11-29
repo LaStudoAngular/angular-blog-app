@@ -26,6 +26,9 @@ export class LoginPageComponent implements OnInit {
       if (params.loginAgain) {
         this.message = 'Login again, please';
       }
+      if (params.authFailed) {
+        this.message = 'Failed to send data to Firebase';
+      }
     });
     this.form = this.fb.group({
       email: [null, [Validators.required, Validators.email]],

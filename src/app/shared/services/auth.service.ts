@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { User } from '../interfaces/user';
 import { Observable, Subject, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
-import { FirebaseAuthResponse } from '../interfaces/firebase-auth-response';
+import { FirebaseAuthResponse, User } from '../interfaces';
 
 const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`;
 

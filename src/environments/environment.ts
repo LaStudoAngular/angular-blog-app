@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { Environment } from '../app/shared/interfaces/environment';
+import { Environment } from '../app/shared/interfaces';
 
 export const environment: Environment = {
   production: false,
@@ -18,3 +18,5 @@ export const environment: Environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+// name: "-LupsiQn9JghOTQiYWbo"

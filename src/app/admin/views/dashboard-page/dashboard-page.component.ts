@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../../shared/services/post.service';
-import { Post } from '../../../shared/interfaces/post';
+import { Post } from '../../../shared/interfaces';
 
 @Component({
   selector: 'bl-dashboard-page',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../shared/interfaces/user';
+import { User } from '../../../shared/interfaces';
 import { AuthService } from '../../../shared/services/auth.service';
-import { ActivatedRoute, Params, Route, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'bl-login-page',

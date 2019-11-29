@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Post } from '../../../shared/interfaces';
 import { PostService } from '../../../shared/services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bl-create-page',
@@ -11,7 +12,7 @@ import { PostService } from '../../../shared/services/post.service';
 export class CreatePageComponent implements OnInit {
   createForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private postService: PostService) {}
+  constructor(private fb: FormBuilder, private postService: PostService, private router: Router) {}
 
   ngOnInit(): void {
     this.createForm = this.fb.group({
@@ -41,6 +42,9 @@ export class CreatePageComponent implements OnInit {
       author,
       date: new Date(),
     };
-    this.postService.createPost(newPost).subscribe((post: Post) => console.log(post));
+    this.postService.createPost(newPost).subscribe((post: Post) => {
+      this.createForm.reset();
+      this.router.navigate(['admin', 'dashboard']);
+    });
   }
 }

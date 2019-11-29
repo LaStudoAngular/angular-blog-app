@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class DashboardPageComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   private unsubscribe = new Subscription();
+  public searchString = '';
 
   constructor(private postService: PostService, private router: Router) {}
 

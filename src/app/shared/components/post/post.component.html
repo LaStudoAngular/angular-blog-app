@@ -1,10 +1,10 @@
 <div class="card">
   <div class="card-header">
-    <h2>post title</h2>
-    <small>12.12.2012</small>
+    <h2>{{ post.title }}</h2>
+    <small>{{ post.date | date:'dd.MM.yyyy' }}</small>
   </div>
-  <div>
-    <small>post text</small>
+  <div style="margin-bottom: 1rem;">
+    <small [innerHTML]="post.body.slice(0, 199)"></small>
   </div>
-  <button [routerLink]="['/post', 1]" class="btn btn-dark">open</button>
+  <button [routerLink]="['/post', post.id]" class="btn btn-dark">open</button>
 </div>

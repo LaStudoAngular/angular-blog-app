@@ -1,6 +1,10 @@
-<div class="posts">
-  <bl-post></bl-post>
-  <bl-post></bl-post>
-  <bl-post></bl-post>
-  <bl-post></bl-post>
+<div
+  *ngIf="posts$ | async as posts; else loading"
+  class="posts"
+>
+  <bl-post *ngFor="let post of posts" [post]="post"></bl-post>
 </div>
+
+<ng-template #loading>
+  <h2>loading data from firebase</h2>
+</ng-template>

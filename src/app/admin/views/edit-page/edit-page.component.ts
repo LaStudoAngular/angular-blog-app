@@ -5,6 +5,7 @@ import { Post } from '../../../shared/interfaces';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'bl-edit-page',
@@ -21,6 +22,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private fb: FormBuilder,
     private router: Router,
+    private alertService: AlertService
   ) {}
 
   onSubmit() {
@@ -32,6 +34,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
         body,
       };
       this.updateSub = this.postService.updatePost(editPost).subscribe(() => {
+        this.alertService.warning('Post was edited');
         this.editForm.reset();
         this.router.navigate(['admin', 'dashboard']);
       });

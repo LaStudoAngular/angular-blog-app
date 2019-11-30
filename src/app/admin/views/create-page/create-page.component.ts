@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Post } from '../../../shared/interfaces';
 import { PostService } from '../../../shared/services/post.service';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'bl-create-page',
@@ -12,7 +13,12 @@ import { Router } from '@angular/router';
 export class CreatePageComponent implements OnInit {
   createForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private postService: PostService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private postService: PostService,
+    private router: Router,
+    private alertService: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.createForm = this.fb.group({
@@ -42,9 +48,13 @@ export class CreatePageComponent implements OnInit {
       author,
       date: new Date(),
     };
-    this.postService.createPost(newPost).subscribe((post: Post) => {
+    this.postService.createPost(newPost).subscribe(() => {
       this.createForm.reset();
-      this.router.navigate(['admin', 'dashboard']);
+      this.alertService.success('Post sucess created');
+      const redirect = setTimeout(() => {
+        clearTimeout(redirect);
+        this.router.navigate(['admin', 'dashboard']);
+      }, 5000);
     });
   }
 }

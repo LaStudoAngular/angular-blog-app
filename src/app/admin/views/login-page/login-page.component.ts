@@ -10,7 +10,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  private form: FormGroup;
+  public form: FormGroup;
   public submitted = false;
   public message = '';
 

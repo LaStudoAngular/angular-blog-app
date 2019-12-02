@@ -22,10 +22,10 @@ export class EditPageComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private fb: FormBuilder,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) {}
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.editForm.valid) {
       const { title, body } = this.editForm.value;
       const editPost: Post = {

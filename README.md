@@ -1,3 +1,3 @@
 # Angular Blog Application
 
-Just simple application to learn Angular
+Simple Angular PWA application using Firebase Database and Firebase Hosting
